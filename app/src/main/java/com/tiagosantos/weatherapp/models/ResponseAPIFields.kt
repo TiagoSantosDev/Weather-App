@@ -1,9 +1,17 @@
 package com.tiagosantos.weatherapp.models
 
+import com.google.gson.annotations.SerializedName
+
 data class CurrentWeather(
-    var locationName: String,
-    var currentWeather: String,
-    var currentTemp: Double
+    @SerializedName("weather")
+    var currentWeather: List<Weather>,
+)
+
+data class Weather(
+    @SerializedName("main")
+    val main: String,
+    @SerializedName("main")
+    val description: String,
 )
 
 // locationName refers to the city Name
