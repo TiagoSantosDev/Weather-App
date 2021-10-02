@@ -1,10 +1,11 @@
-package com.tiagosantos.weatherapp
+package com.tiagosantos.weatherapp.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.tiagosantos.weatherapp.R
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
