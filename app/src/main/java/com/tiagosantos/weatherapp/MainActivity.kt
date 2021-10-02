@@ -9,8 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,12 +23,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         // get current location
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
+        /*
         getLocation(this.applicationContext) { location ->
             location?.let { (latitude, longitude) ->
+                println("chegou aqui")
+                println("Latitude : $latitude")
+                println("Longitude: $longitude")
             }
-        }
+        }*/
+
+        requestLocation()
     }
 
     /*
@@ -48,7 +51,85 @@ class MainActivity : AppCompatActivity() {
         }
     }*/
 
+    private fun requestLocation() {
+        val mLocationRequest = LocationRequest.create()
+        mLocationRequest.interval = 1000
+        mLocationRequest.fastestInterval = 100
+        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        val mLocationCallback: LocationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                if (locationResult == null) {
+                    return
+                }
+                for (location in locationResult.locations) {
+                    if (location != null) {
+                        // TODO: UI updates.
+                        println("location was found")
+                    }
+                }
+            }
+        }
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        LocationServices.getFusedLocationProviderClient(this.applicationContext)
+            .requestLocationUpdates(mLocationRequest, mLocationCallback, null)
+
+        LocationServices.getFusedLocationProviderClient(this.applicationContext).lastLocation.addOnSuccessListener {
+            // TODO: UI updates.
+            println("Chegou aqui")
+        }
+    }
+
     private fun getLocation(context: Context, onComplete: (Location?) -> Unit) {
+        println("entrou no get Location")
+
+        val mLocationRequest = LocationRequest.create()
+        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        val mLocationCallback: LocationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                for (location in locationResult.locations) {
+                    if (location != null) {
+                        // TODO: UI updates.
+                    }
+                }
+            }
+        }
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
+        LocationServices.getFusedLocationProviderClient(context)
+            .requestLocationUpdates(mLocationRequest, mLocationCallback, null)
+
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -56,7 +137,10 @@ class MainActivity : AppCompatActivity() {
         ) {
             LocationServices
                 .getFusedLocationProviderClient(context)
-                .lastLocation.addOnSuccessListener { onComplete(it) }
+                .lastLocation.addOnSuccessListener {
+                    println("success listener")
+                    onComplete(it)
+                }
         }
     }
 

@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.tiagosantos.weatherapp.R
+import com.tiagosantos.weatherapp.databinding.FragmentFirstBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
+
+    private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
