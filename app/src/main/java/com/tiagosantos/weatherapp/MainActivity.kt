@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         requestLocation()
+
     }
 
     /*
