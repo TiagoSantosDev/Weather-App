@@ -8,20 +8,20 @@ import kotlin.properties.Delegates.observable
 
 @Parcelize
 class TimelineAttributes(
-    var markerSize: Int,
-    var markerColor: Int,
-    var markerInCenter: Boolean,
-    var markerLeftPadding: Int,
-    var markerTopPadding: Int,
-    var markerRightPadding: Int,
-    var markerBottomPadding: Int,
-    var linePadding: Int,
-    var lineWidth: Int,
-    var startLineColor: Int,
-    var endLineColor: Int,
-    var lineStyle: Int,
-    var lineDashWidth: Int,
-    var lineDashGap: Int
+    private var markerSize: Int,
+    private var markerColor: Int,
+    private var markerInCenter: Boolean,
+    private var markerLeftPadding: Int,
+    private var markerTopPadding: Int,
+    private var markerRightPadding: Int,
+    private var markerBottomPadding: Int,
+    private var linePadding: Int,
+    private var lineWidth: Int,
+    private var startLineColor: Int,
+    private var endLineColor: Int,
+    private var lineStyle: Int,
+    private var lineDashWidth: Int,
+    private var lineDashGap: Int
 ) : Parcelable {
 
     @IgnoredOnParcel
@@ -47,8 +47,7 @@ class TimelineAttributes(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readInt()
-    ) {
-    }
+    )
 
     fun copy(): TimelineAttributes {
         val attributes = TimelineAttributes(

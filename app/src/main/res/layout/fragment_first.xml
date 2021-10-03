@@ -20,11 +20,17 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cityList"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"
             tools:listitem="@layout/list_item"/>
     </androidx.core.widget.NestedScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:id="@+id/dropshadow"
+        android:layout_marginTop="?actionBarSize" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

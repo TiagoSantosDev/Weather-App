@@ -9,7 +9,7 @@
     android:background="@color/light_blue">
 
     <TextView
-        android:id="@+id/pressure_label"
+        android:id="@+id/humidity_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -24,7 +24,7 @@
         tools:text="Humidity" />
 
     <TextView
-        android:id="@+id/temp"
+        android:id="@+id/humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

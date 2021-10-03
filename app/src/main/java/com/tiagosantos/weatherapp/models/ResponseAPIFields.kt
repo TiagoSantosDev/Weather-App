@@ -6,8 +6,7 @@ data class CurrentWeather(
     @SerializedName("id")
     val id: String,
     @SerializedName("weather")
-    var currentWeather: List<Weather>,
-
+    var currentWeather: List<Weather>
 )
 
 data class Weather(
@@ -15,7 +14,11 @@ data class Weather(
     val main: String,
     @SerializedName("description")
     val description: String,
-    val iconCode: String
+    val iconCode: String,
+    val humidity: Int,
+    val pressure: Int,
+    val temp: Double
+
 )
 
 // locationName refers to the city Name

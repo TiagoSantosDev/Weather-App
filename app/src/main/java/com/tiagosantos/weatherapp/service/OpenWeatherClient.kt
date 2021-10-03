@@ -1,13 +1,16 @@
 package com.tiagosantos.weatherapp.service
 
+import com.tiagosantos.weatherapp.models.CurrentWeather
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class OpenWeatherClient {
 
-    fun initClient() {
-        var OpenWeatherClient = retrofit.create(OpenWeatherClient::class.java)
+    suspend fun initClient(): CurrentWeather {
+        val openWeatherClient = retrofit.create(ApiInterface::class.java)
+
+        return openWeatherClient.fetchCurrentWeatherForCity("800")
     }
 
     private val retrofit by lazy {
@@ -26,14 +29,3 @@ class OpenWeatherClient {
             .client(client).build()
     }
 }
-
-/*
-    fun getClient(): Retrofit? {
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl("https://api.openweathermap.org/data/2.5/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        }
-        return retrofit
-    }*/

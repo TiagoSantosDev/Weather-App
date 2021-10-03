@@ -5,15 +5,19 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tiagosantos.weatherapp.R
+import com.tiagosantos.weatherapp.adapters.TimeLineAdapter
 import com.tiagosantos.weatherapp.databinding.FragmentFirstBinding
+import com.tiagosantos.weatherapp.models.CurrentWeather
 import com.tiagosantos.weatherapp.models.Orientation
 import com.tiagosantos.weatherapp.models.TimelineAttributes
+import kotlinx.android.synthetic.main.fragment_first.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -26,19 +30,20 @@ class FirstFragment : Fragment() {
     private lateinit var mLayoutManager: LinearLayoutManager
     private lateinit var mAttributes: TimelineAttributes
 
+    private var weatherDataList = MutableLiveData<CurrentWeather>()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        // viewModel.requestLocation(requireActivity().applicationContext)
-        // viewModel.getCurrentLocation(requireActivity().applicationContext, activity)
+    ): View {
+        // fetches the current coordinates of the user location
+        viewModel.getCurrentLocation(requireActivity().applicationContext, activity)
         return FragmentFirstBinding.inflate(layoutInflater, container, false)
-                .let {
-                    binding = it
-                    binding.root
-                }
+            .let {
+                binding = it
+                binding.root
+            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,7 +67,7 @@ class FirstFragment : Fragment() {
             @SuppressLint("LongLogTag")
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.getChildAt(0).top < 0) dropshadow.setVisible() else dropshadow.setGone()
+                if (recyclerView.getChildAt(0).top < 0) dropshadow.visibility = VISIBLE
             }
         })
     }
@@ -76,8 +81,7 @@ class FirstFragment : Fragment() {
 
         recyclerView.apply {
             layoutManager = mLayoutManager
-            adapter = TimeLineAdapter(mDataList, mAttributes, ctx)
+            adapter = TimeLineAdapter(weatherDataList, mAttributes, ctx)
         }
     }
-
 }
