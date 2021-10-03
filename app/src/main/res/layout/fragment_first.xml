@@ -8,6 +8,15 @@
     app:layoutDescription="@xml/fragment_first_scene"
     tools:context=".ui.FirstFragment">
 
+    <com.tiagosantos.weatherapp.timeline.TimelineView
+        android:id="@+id/timeline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lineStyle="dash"
+        app:lineWidth="3dp"
+        app:markerSize="20dp"
+        app:strokeWidth="5dp" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"

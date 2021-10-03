@@ -55,7 +55,7 @@ class TimeLineAdapter(private val mFeedList: MutableLiveData<CurrentWeather>, pr
 
         //val cityName = itemView.text_timeline_cityName
         //val temp = itemView.text_timeline_temp
-        private val timeline = itemView.
+        private val timeline = R.layout.
 
         init {
             timeline.initLine(viewType)
