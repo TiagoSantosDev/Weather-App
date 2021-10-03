@@ -1,12 +1,33 @@
 package com.tiagosantos.weatherapp.service
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class OpenWeatherClient {
 
-    var retrofit: Retrofit? = null
+    fun initClient() {
+        var OpenWeatherClient = retrofit.create(OpenWeatherClient::class.java)
+    }
 
+    private val retrofit by lazy {
+        val client = OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val url = chain.request().url.newBuilder()
+                    .addQueryParameter("appid", "")
+                    .addQueryParameter("units", "metric").build()
+                val request = chain.request().newBuilder()
+                    .url(url).build()
+                chain.proceed(request)
+            }.build()
+        Retrofit.Builder()
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client).build()
+    }
+}
+
+/*
     fun getClient(): Retrofit? {
         if (retrofit == null) {
             retrofit = Retrofit.Builder()
@@ -15,5 +36,4 @@ class OpenWeatherClient {
                 .build()
         }
         return retrofit
-    }
-}
+    }*/

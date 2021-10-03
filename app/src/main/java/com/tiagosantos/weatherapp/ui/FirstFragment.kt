@@ -23,6 +23,8 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        // viewModel.requestLocation(requireActivity().applicationContext)
+        // viewModel.getCurrentLocation(requireActivity().applicationContext, activity)
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
