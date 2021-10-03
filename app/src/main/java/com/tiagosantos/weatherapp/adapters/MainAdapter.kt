@@ -12,7 +12,7 @@ import com.github.vipulasri.timelineview.TimelineView
 import com.tiagosantos.weatherapp.R
 import com.tiagosantos.weatherapp.models.CurrentWeather
 import com.tiagosantos.weatherapp.models.TimelineAttributes
-
+import kotlinx.android.synthetic.main.fragment_first.view.*
 
 class TimeLineAdapter(private val mFeedList: MutableLiveData<CurrentWeather>, private var mAttributes: TimelineAttributes, private val ctx: Context) : RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder>() {
 
@@ -21,21 +21,20 @@ class TimeLineAdapter(private val mFeedList: MutableLiveData<CurrentWeather>, pr
         val timeLineModel = mFeedList.value
 
         if (timeLineModel != null) {
-            if (!timeLineModel.id.isEmpty()) {
+            if (timeLineModel.id.isNotEmpty()) {
                 holder.itemView.findViewById<TextView>(R.id.cityName).text = timeLineModel.id
-            }else{
+            } else {
                 holder.itemView.visibility = INVISIBLE
             }
         }
 
-        //Adjusts weather icon accordingly to the weather code extracted from the API response
+        // Adjusts weather icon accordingly to the weather code extracted from the API response
         if (timeLineModel != null) {
             when (timeLineModel.currentWeather[position].iconCode) {
                 "01d", "02d" -> R.drawable.sun
                 else -> throw Error("Invalid code!")
             }
         }
-
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -44,18 +43,18 @@ class TimeLineAdapter(private val mFeedList: MutableLiveData<CurrentWeather>, pr
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeLineAdapter.TimeLineViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-                R.layout.list_item,
-                parent,
-                false
+            R.layout.list_item,
+            parent,
+            false
         )
         return TimeLineViewHolder(view, 1)
     }
 
     inner class TimeLineViewHolder(itemView: View, viewType: Int) : RecyclerView.ViewHolder(itemView) {
 
-        //val cityName = itemView.text_timeline_cityName
-        //val temp = itemView.text_timeline_temp
-        private val timeline = R.layout.
+        // val cityName = itemView.text_timeline_cityName
+        // val temp = itemView.text_timeline_temp
+        private val timeline = itemView.recyclerView.timeline
 
         init {
             timeline.initLine(viewType)
@@ -66,17 +65,13 @@ class TimeLineAdapter(private val mFeedList: MutableLiveData<CurrentWeather>, pr
     }
 
     data class ItemValues(
-            val id: String,
-            val cityName: String,
-            val temperature: String,
-            val iconCode: String
+        val id: String,
+        val cityName: String,
+        val temperature: String,
+        val iconCode: String
     )
-
-
 
     override fun getItemCount(): Int {
         TODO("Not yet implemented")
     }
-
-
 }

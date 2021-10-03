@@ -47,7 +47,6 @@ class FirstFragmentViewModel : ViewModel() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location ->
                 // getting the last known or current location
-                println("onSuccess")
                 latitude = location.latitude
                 longitude = location.longitude
                 println("Latitude: $latitude, Longitude: $longitude")

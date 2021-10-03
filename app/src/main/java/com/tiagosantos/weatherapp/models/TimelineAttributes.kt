@@ -9,7 +9,7 @@ import kotlin.properties.Delegates.observable
 @Parcelize
 class TimelineAttributes(
     private var markerSize: Int,
-    private var markerColor: Int,
+    var markerColor: Int,
     private var markerInCenter: Boolean,
     private var markerLeftPadding: Int,
     private var markerTopPadding: Int,
@@ -17,8 +17,8 @@ class TimelineAttributes(
     private var markerBottomPadding: Int,
     private var linePadding: Int,
     private var lineWidth: Int,
-    private var startLineColor: Int,
-    private var endLineColor: Int,
+    var startLineColor: Int,
+    var endLineColor: Int,
     private var lineStyle: Int,
     private var lineDashWidth: Int,
     private var lineDashGap: Int
