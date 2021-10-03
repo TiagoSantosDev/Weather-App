@@ -2,7 +2,8 @@ package com.tiagosantos.weatherapp.models
 
 import android.os.Parcel
 import android.os.Parcelable
-
+import kotlinx.android.parcel.IgnoredOnParcel
+import kotlinx.android.parcel.Parcelize
 import kotlin.properties.Delegates.observable
 
 @Parcelize
@@ -24,7 +25,7 @@ class TimelineAttributes(
 ) : Parcelable {
 
     @IgnoredOnParcel
-    var orientation by observable(RecyclerView.Orientation.VERTICAL) { _, oldValue, newValue ->
+    var orientation by observable(Orientation.VERTICAL) { _, oldValue, newValue ->
         onOrientationChanged?.invoke(oldValue, newValue)
     }
 
@@ -47,7 +48,6 @@ class TimelineAttributes(
         parcel.readInt(),
         parcel.readInt()
     ) {
-
     }
 
     fun copy(): TimelineAttributes {
@@ -62,9 +62,9 @@ class TimelineAttributes(
 
     override fun toString(): String {
         return "TimelineAttributes(markerSize=$markerSize, markerColor=$markerColor, markerInCenter=$markerInCenter, " +
-                "markerTopPadding=$markerTopPadding, markerBottomPadding=$markerBottomPadding, linePadding=$linePadding, " +
-                "lineWidth=$lineWidth, startLineColor=$startLineColor, endLineColor=$endLineColor, lineStyle=$lineStyle, " +
-                "lineDashWidth=$lineDashWidth, lineDashGap=$lineDashGap, onOrientationChanged=$onOrientationChanged)"
+            "markerTopPadding=$markerTopPadding, markerBottomPadding=$markerBottomPadding, linePadding=$linePadding, " +
+            "lineWidth=$lineWidth, startLineColor=$startLineColor, endLineColor=$endLineColor, lineStyle=$lineStyle, " +
+            "lineDashWidth=$lineDashWidth, lineDashGap=$lineDashGap, onOrientationChanged=$onOrientationChanged)"
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
