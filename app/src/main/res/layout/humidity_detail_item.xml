@@ -5,48 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    android:background="@color/light_blue">
 
     <TextView
-        android:id="@+id/cityName"
+        android:id="@+id/pressure_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textColor="#03A9F4"
-        android:textSize="22sp"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/white"
+        android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.181"
-        tools:text="City Name" />
+        tools:text="Humidity" />
 
     <TextView
         android:id="@+id/temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:text="@string/temperature"
-        android:textColor="#FF9800"
-        android:textSize="34sp"
+        android:textColor="@color/white"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cityName"
+        app:layout_constraintTop_toBottomOf="@+id/pressure_label"
         app:layout_constraintVertical_bias="0.218"
-        tools:text="Temp" />
+        tools:text="46%" />
 
     <ImageView
         android:id="@+id/weatherIcon"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="32dp"
-        android:contentDescription="@string/weather_icon"
+        android:contentDescription="@string/pressure_icon"
+        android:backgroundTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/sun" />
+        app:srcCompat="@drawable/outline_water_drop_white_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

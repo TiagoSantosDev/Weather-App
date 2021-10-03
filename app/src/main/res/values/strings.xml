@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="temperature">temp</string>
     <string name="weather_icon">Weather Icon</string>
+    <string name="pressure_icon">Pressure icon</string>
+    <string name="return_previous">Return to previous screen</string>
 </resources>
